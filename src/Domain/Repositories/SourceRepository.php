@@ -3,6 +3,7 @@
 namespace ZnLib\Migration\Domain\Repositories;
 
 use ZnCore\Base\Exceptions\InvalidConfigException;
+use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnLib\Fixture\Domain\Traits\ConfigTrait;
@@ -11,11 +12,12 @@ use ZnLib\Migration\Domain\Entities\MigrationEntity;
 class SourceRepository
 {
 
-    use ConfigTrait;
+    //use ConfigTrait;
 
     public function __construct($mainConfigFile = null)
     {
-        $config = $this->loadConfig($mainConfigFile);
+        $config = LoadHelper::loadConfig($mainConfigFile);
+        //$config = $this->loadConfig($mainConfigFile);
         $this->config = $config['migrate'] ?? [];
         /*if(empty($this->config)) {
             throw new InvalidConfigException('Empty migrtion configuration!');

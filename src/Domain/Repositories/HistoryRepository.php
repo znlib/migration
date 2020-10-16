@@ -2,9 +2,11 @@
 
 namespace ZnLib\Migration\Domain\Repositories;
 
+use Illuminate\Container\Container;
 use Illuminate\Database\Schema\Blueprint;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnLib\Db\Base\BaseEloquentRepository;
+use ZnLib\Db\Capsule\Manager;
 use ZnLib\Migration\Domain\Base\BaseCreateTableMigration;
 use ZnLib\Migration\Domain\Entities\MigrationEntity;
 use ZnCore\Base\Helpers\ClassHelper;
@@ -18,10 +20,17 @@ class HistoryRepository extends BaseEloquentRepository
     const MIGRATION_TABLE_NAME = 'eq_migration';
 
     protected $tableName = self::MIGRATION_TABLE_NAME;
+    protected $container;
 
     public function getEntityClass(): string
     {
         return MigrationEntity::class;
+    }
+
+    public function __construct(Manager $capsule, Container $container)
+    {
+        parent::__construct($capsule);
+        $this->container = $container;
     }
 
     public static function filterVersion(array $sourceCollection, array $historyCollection)
@@ -68,7 +77,8 @@ class HistoryRepository extends BaseEloquentRepository
     {
         $migration = $this->createMigrationClass($class);
         $schema = $this->getSchema();
-        $connection = $schema->getConnection();
+        $connection = $migration->getConnection();
+        //$connection = $schema->getConnection();
         // todo: begin transaction
         $connection->beginTransaction();
         $migration->up($schema);
@@ -93,9 +103,10 @@ class HistoryRepository extends BaseEloquentRepository
     }
 
     private function createMigrationClass(string $class): MigrationInterface {
-        $migration = new $class($this->getCapsule());
-        ClassHelper::isInstanceOf($migration, MigrationInterface::class);
-        return $migration;
+        //$migration = new $class($this->getCapsule());
+        return $this->container->get($class);
+//        ClassHelper::isInstanceOf($migration, MigrationInterface::class);
+//        return $migration;
     }
 
     public function all($connectionName = 'default')
