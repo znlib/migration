@@ -5,6 +5,7 @@ namespace ZnLib\Migration\Domain\Base;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\DB;
 use ZnLib\Db\Enums\DbDriverEnum;
+use ZnLib\Db\Factories\ManagerFactory;
 use ZnLib\Db\Helpers\DbHelper;
 use ZnLib\Db\Capsule\Manager;
 use ZnLib\Db\Helpers\SqlHelper;
@@ -20,7 +21,8 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
 
     public function __construct(Manager $capsule)
     {
-        $this->capsule = $capsule;
+        $this->capsule = ManagerFactory::createManagerFromEnv();
+//        $this->capsule = $capsule;
     }
 
     public function getCapsule(): Manager
