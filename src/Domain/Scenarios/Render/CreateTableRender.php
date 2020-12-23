@@ -23,26 +23,6 @@ class CreateTableRender extends BaseRender
     public function run()
     {
         $this->createClass();
-
-        /*$className = $this->getClassName();
-        $fullClassName = $this->getFullClassName();
-        $fileGenerator = new FileGenerator;
-        $classGenerator = new ClassGenerator;
-        $classGenerator->setName($className);
-        if($this->isMakeInterface()) {
-            $classGenerator->setImplementedInterfaces([$this->getInterfaceName()]);
-            $fileGenerator->setUse($this->getInterfaceFullName());
-        }
-        if($this->attributes) {
-            foreach ($this->attributes as $attribute) {
-                $classGenerator->addProperties([
-                    [Inflector::variablize($attribute)]
-                ]);
-            }
-        }
-        $fileGenerator->setNamespace($this->domainNamespace . '\\' . $this->classDir());
-        $fileGenerator->setClass($classGenerator);
-        ClassHelper::generateFile($fileGenerator->getNamespace() . '\\' . $className, $fileGenerator->generate());*/
     }
 
     protected function getClassName(): string
@@ -62,13 +42,8 @@ class CreateTableRender extends BaseRender
 
         $code = TemplateCodeHelper::generateMigrationClassCode($this->getClassName(), $this->dto->attributes, $this->dto->tableName);
 
-        //dd($code);
-
         $fileGenerator->setBody($code);
         $fileName = $this->getFileName();
-
-        //dd($fileGenerator->generate());
-        //dd($fileName);
 
         FileHelper::save($fileName, $fileGenerator->generate());
     }
