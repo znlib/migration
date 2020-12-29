@@ -2,8 +2,8 @@
 
 namespace ZnLib\Migration\Commands;
 
-use ZnTool\Dev\Generator\Domain\Dto\BuildDto;
-use ZnTool\Dev\Generator\Domain\Scenarios\Input\BaseInputScenario;
+use ZnTool\Generator\Domain\Dto\BuildDto;
+use ZnTool\Generator\Domain\Scenarios\Input\BaseInputScenario;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

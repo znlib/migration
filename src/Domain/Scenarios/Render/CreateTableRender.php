@@ -9,7 +9,7 @@ use ZnCore\Base\Legacy\Code\entities\ClassVariableEntity;
 use ZnCore\Base\Legacy\Code\entities\InterfaceEntity;
 use ZnCore\Base\Legacy\Code\enums\AccessEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
-use ZnTool\Dev\Generator\Domain\Helpers\TemplateCodeHelper;
+use ZnTool\Generator\Domain\Helpers\TemplateCodeHelper;
 use ZnTool\Package\Domain\Helpers\PackageHelper;
 
 class CreateTableRender extends BaseRender
