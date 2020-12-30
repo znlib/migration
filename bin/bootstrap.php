@@ -12,6 +12,7 @@ use ZnLib\Migration\Commands\DownCommand;
 use ZnLib\Migration\Commands\GenerateCommand;
 use Illuminate\Container\Container;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
+use Psr\Container\ContainerInterface;
 
 /**
  * @var Application $application
@@ -23,6 +24,9 @@ use ZnLib\Console\Symfony4\Helpers\CommandHelper;
 $container->bind('ZnLib\Migration\Domain\Interfaces\Services\GenerateServiceInterface', 'ZnLib\Migration\Domain\Services\GenerateService');
 $container->bind('ZnLib\Migration\Domain\Interfaces\Repositories\GenerateRepositoryInterface', 'ZnLib\Migration\Domain\Repositories\File\GenerateRepository');
 
+$container->bind(ContainerInterface::class, function (ContainerInterface $container) {
+    return $container;
+});
 $container->bind(SourceRepository::class, function () {
     return new SourceRepository($_ENV['ELOQUENT_CONFIG_FILE']);
 });
