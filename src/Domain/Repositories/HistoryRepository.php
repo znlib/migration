@@ -4,13 +4,12 @@ namespace ZnLib\Migration\Domain\Repositories;
 
 use Illuminate\Container\Container;
 use Illuminate\Database\Schema\Blueprint;
+use ZnCore\Base\Helpers\ClassHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
-use ZnCore\Domain\Libs\EntityManager;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 use ZnLib\Db\Base\BaseEloquentRepository;
 use ZnLib\Db\Capsule\Manager;
-use ZnLib\Migration\Domain\Base\BaseCreateTableMigration;
 use ZnLib\Migration\Domain\Entities\MigrationEntity;
-use ZnCore\Base\Helpers\ClassHelper;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;
 
 //use ZnLib\Db\Helpers\TableAliasHelper;
@@ -28,7 +27,7 @@ class HistoryRepository extends BaseEloquentRepository
         return MigrationEntity::class;
     }
 
-    public function __construct(EntityManager $em, Manager $capsule, Container $container)
+    public function __construct(EntityManagerInterface $em, Manager $capsule, Container $container)
     {
         parent::__construct($em, $capsule);
         $this->container = $container;

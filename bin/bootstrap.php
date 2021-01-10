@@ -13,6 +13,8 @@ use ZnLib\Migration\Commands\GenerateCommand;
 use Illuminate\Container\Container;
 use ZnLib\Console\Symfony4\Helpers\CommandHelper;
 use Psr\Container\ContainerInterface;
+use ZnCore\Domain\Libs\EntityManager;
+use ZnCore\Domain\Interfaces\Libs\EntityManagerInterface;
 
 /**
  * @var Application $application
@@ -20,6 +22,11 @@ use Psr\Container\ContainerInterface;
  */
 
 //$capsule = $container->get(Manager::class);
+
+$em = new EntityManager($container);
+$container->bind(EntityManagerInterface::class, function (ContainerInterface $container) use ($em) {
+    return $em;
+});
 
 $container->bind('ZnLib\Migration\Domain\Interfaces\Services\GenerateServiceInterface', 'ZnLib\Migration\Domain\Services\GenerateService');
 $container->bind('ZnLib\Migration\Domain\Interfaces\Repositories\GenerateRepositoryInterface', 'ZnLib\Migration\Domain\Repositories\File\GenerateRepository');
