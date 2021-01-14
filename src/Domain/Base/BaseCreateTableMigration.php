@@ -53,14 +53,14 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
         $connection = $this->getConnection();
         $driver = $connection->getConfig('driver');
         $table = $this->tableNameAlias();
-        $table = SqlHelper::generateRawTableName($table);
+        $quotedTableName = SqlHelper::generateRawTableName($table);
         $tableComment = $this->tableComment;
         $sql = '';
         if ($driver == DbDriverEnum::MYSQL) {
-            $sql = "ALTER TABLE {$table} COMMENT = '{$tableComment}';";
+            $sql = "ALTER TABLE {$table} COMMENT '{$tableComment}';";
         }
         if ($driver == DbDriverEnum::PGSQL) {
-            $sql = "COMMENT ON TABLE {$table} IS '{$tableComment}';";
+            $sql = "COMMENT ON TABLE {$quotedTableName} IS '{$tableComment}';";
         }
         if ($sql) {
             $this->runSqlQuery($schema, $sql);
