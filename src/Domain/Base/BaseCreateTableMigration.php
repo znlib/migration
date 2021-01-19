@@ -35,7 +35,7 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
         $isHasSchema = SqlHelper::isHasSchemaInTableName($this->tableNameAlias());
         if ($isHasSchema) {
             $schemaName = SqlHelper::extractSchemaFormTableName($this->tableNameAlias());
-            $this->getConnection()->select('CREATE SCHEMA IF NOT EXISTS "' . $schemaName . '";');
+            $this->getConnection()->statement('CREATE SCHEMA IF NOT EXISTS "' . $schemaName . '";');
         }
         $schema->create($this->tableNameAlias(), $this->tableSchema());
         if ($this->tableComment) {
