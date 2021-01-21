@@ -46,7 +46,7 @@ abstract class BaseCommand extends Command
             return true;
         }
         $helper = $this->getHelper('question');
-        $question = new ConfirmationQuestion($question . ' (y|n) [n]: ', false);
+        $question = new ConfirmationQuestion($question . ' (Y|n): ', true);
         return $helper->ask($input, $output, $question);
     }
 
