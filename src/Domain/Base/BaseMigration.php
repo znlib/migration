@@ -4,16 +4,23 @@ namespace ZnLib\Migration\Domain\Base;
 
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Builder;
+use ZnLib\Db\Capsule\Manager;
+use ZnLib\Db\Factories\ManagerFactory;
 use ZnLib\Db\Traits\TableNameTrait;
 
 abstract class BaseMigration
 {
 
-    use TableNameTrait;
+    protected $capsule;
 
-    public function getConnection(): Connection
+    public function __construct(Manager $capsule)
     {
-        return $this->capsule->getConnection($this->connectionName());
+        $this->capsule = $capsule;
+    }
+
+    public function getCapsule(): Manager
+    {
+        return $this->capsule;
     }
 
     protected function runSqlQuery(Builder $schema, $sql)
@@ -22,5 +29,4 @@ abstract class BaseMigration
         $rawSql = $connection->raw($sql);
         $connection->select($rawSql);
     }
-
 }

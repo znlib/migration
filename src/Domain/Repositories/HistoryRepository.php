@@ -77,8 +77,8 @@ class HistoryRepository extends BaseEloquentRepository
     {
         $migration = $this->createMigrationClass($class);
         $schema = $this->getSchema();
-        $connection = $migration->getConnection();
-        //$connection = $schema->getConnection();
+        //$connection = $migration->getConnection();
+        $connection = $schema->getConnection();
         // todo: begin transaction
         $connection->beginTransaction();
         $migration->up($schema);

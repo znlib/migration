@@ -2,6 +2,7 @@
 
 namespace ZnLib\Migration\Domain\Base;
 
+use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\DB;
 use ZnLib\Db\Enums\DbDriverEnum;
@@ -9,25 +10,21 @@ use ZnLib\Db\Factories\ManagerFactory;
 use ZnLib\Db\Helpers\DbHelper;
 use ZnLib\Db\Capsule\Manager;
 use ZnLib\Db\Helpers\SqlHelper;
+use ZnLib\Db\Traits\TableNameTrait;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;
 
 abstract class BaseCreateTableMigration extends BaseMigration implements MigrationInterface
 {
 
+    use TableNameTrait;
+
     protected $tableComment = '';
-    protected $capsule;
 
     abstract public function tableSchema();
 
-    public function __construct(Manager $capsule)
+    public function getConnection(): Connection
     {
-        $this->capsule = ManagerFactory::createManagerFromEnv();
-//        $this->capsule = $capsule;
-    }
-
-    public function getCapsule(): Manager
-    {
-        return $this->capsule;
+        return $this->capsule->getConnection($this->connectionName());
     }
 
     public function up(Builder $schema)
