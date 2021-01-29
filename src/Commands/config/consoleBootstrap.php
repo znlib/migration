@@ -16,6 +16,11 @@ $kernel = new Kernel('console');
 $container = Container::getInstance();
 $kernel->setContainer($container);
 $bundleLoader = new BundleLoader([], ['i18next', 'container', 'console', 'migration']);
+$appBundlesConfigFile = \ZnCore\Base\Legacy\Yii\Helpers\FileHelper::path($_ENV['BUNDLES_CONFIG_FILE']);
+
+if(file_exists($appBundlesConfigFile)) {
+    $bundleLoader->addBundles(include $appBundlesConfigFile);
+}
 $bundleLoader->addBundles(include __DIR__ . '/bundle.php');
 $kernel->setLoader($bundleLoader);
 
