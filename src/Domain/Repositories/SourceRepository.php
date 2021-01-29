@@ -17,6 +17,7 @@ class SourceRepository
     public function __construct($mainConfigFile = null)
     {
         $config = LoadHelper::loadConfig($mainConfigFile);
+        //dd($_ENV['ELOQUENT_MIGRATIONS']);
         //$config = $this->loadConfig($mainConfigFile);
         $this->config = $config['migrate'] ?? [];
         /*if(empty($this->config)) {
@@ -28,6 +29,7 @@ class SourceRepository
     {
         $directories = $this->config['directory'];
         if(empty($directories)) {
+            return [];
             throw new InvalidConfigException('Empty directories configuration for migrtion!');
         }
         $classes = [];
