@@ -13,7 +13,7 @@ class GenerateService extends BaseService implements GenerateServiceInterface
 
     public function __construct(GenerateRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->setRepository($repository);
     }
 
     public function generate(object $dto)
