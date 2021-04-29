@@ -17,4 +17,11 @@ abstract class BaseColumnMigration extends BaseCreateTableMigration
         }
         $schema->table($this->tableNameAlias(), $this->tableSchema());
     }
+    
+    protected function runSqlQuery(Builder $schema, $sql)
+    {
+        $connection = $schema->getConnection();
+        $rawSql = $connection->raw($sql);
+        $connection->select($rawSql);
+    }
 }
