@@ -6,6 +6,7 @@ use ZnCore\Base\Exceptions\InvalidConfigException;
 use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
+use ZnCore\Base\Libs\DotEnv\DotEnv;
 use ZnLib\Fixture\Domain\Traits\ConfigTrait;
 use ZnLib\Migration\Domain\Entities\MigrationEntity;
 
@@ -20,6 +21,7 @@ class SourceRepository
         //dd($_ENV['ELOQUENT_MIGRATIONS']);
         //$config = $this->loadConfig($mainConfigFile);
         $this->config = $config['migrate'] ?? [];
+        $this->config['directory'] = isset($this->config['directory']) ? $this->config['directory'] : DotEnv::get('ELOQUENT_MIGRATIONS', []);
         /*if(empty($this->config)) {
             throw new InvalidConfigException('Empty migrtion configuration!');
         }*/
