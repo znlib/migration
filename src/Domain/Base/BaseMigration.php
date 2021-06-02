@@ -2,11 +2,8 @@
 
 namespace ZnLib\Migration\Domain\Base;
 
-use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Builder;
 use ZnLib\Db\Capsule\Manager;
-use ZnLib\Db\Factories\ManagerFactory;
-use ZnLib\Db\Traits\TableNameTrait;
 
 abstract class BaseMigration
 {

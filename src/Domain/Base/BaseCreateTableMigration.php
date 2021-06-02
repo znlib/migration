@@ -3,14 +3,12 @@
 namespace ZnLib\Migration\Domain\Base;
 
 use Illuminate\Database\Connection;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
-use Illuminate\Support\Facades\DB;
 use ZnLib\Db\Enums\DbDriverEnum;
-use ZnLib\Db\Factories\ManagerFactory;
-use ZnLib\Db\Helpers\DbHelper;
-use ZnLib\Db\Capsule\Manager;
 use ZnLib\Db\Helpers\SqlHelper;
 use ZnLib\Db\Traits\TableNameTrait;
+use ZnLib\Migration\Domain\Enums\ForeignActionEnum;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;
 
 abstract class BaseCreateTableMigration extends BaseMigration implements MigrationInterface
@@ -25,6 +23,23 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
     public function getConnection(): Connection
     {
         return $this->capsule->getConnection($this->connectionName());
+    }
+
+    public function isInOneDatabase(string $tableName): bool
+    {
+        return $this->getCapsule()->isInOneDatabase($this->tableName(), $tableName);
+    }
+
+    public function addForeign(Blueprint $table, string $foreignColumns, string $onTable, string $referencesColumns = 'id', string $onDelete = ForeignActionEnum::CASCADE, string $onUpdate = ForeignActionEnum::CASCADE)
+    {
+        if($this->isInOneDatabase($onTable)) {
+            $table
+                ->foreign($foreignColumns)
+                ->references($referencesColumns)
+                ->on($this->encodeTableName($onTable))
+                ->onDelete($onDelete)
+                ->onUpdate($onUpdate);
+        }
     }
 
     public function up(Builder $schema)
