@@ -84,10 +84,11 @@ class HistoryRepository extends BaseEloquentRepository
 
         //$connection = $migration->getConnection();
         $connection = $schema->getConnection();
+        $connectionName = $connection->getConfig('name');
 
         // todo: begin transaction
         $connection->beginTransaction();
-
+        $this->forgeMigrationTable($connectionName);
         $migration->up($schema);
         $version = ClassHelper::getClassOfClassName($class);
         $this->insert($version, $connection->getConfig('name'));
@@ -125,19 +126,21 @@ class HistoryRepository extends BaseEloquentRepository
 
         $connections = $this->getCapsule()->getConnectionNames();
 
+        $collection = [];
         //dd($connections);
         foreach ($connections as $connectionName) {
-            $this->forgeMigrationTable($connectionName);
+//            $this->forgeMigrationTable($connectionName);
             $queryBuilder = $this->getCapsule()->getQueryBuilderByConnectionName($connectionName, $this->tableNameAlias());
-            $array = $queryBuilder->get()->toArray();
-            $collection = [];
-            foreach ($array as $item) {
-                $entityClass = $this->getEntityClass();
-                $entity = new $entityClass;
-                $entity->version = $item->version;
-                //$entity->className = $className;
-                $collection[] = $entity;
-            }
+            try {
+                $array = $queryBuilder->get()->toArray();
+                foreach ($array as $item) {
+                    $entityClass = $this->getEntityClass();
+                    $entity = new $entityClass;
+                    $entity->version = $item->version;
+                    //$entity->className = $className;
+                    $collection[] = $entity;
+                }
+            } catch (\Throwable $e) {}
         }
 
         return $collection;
