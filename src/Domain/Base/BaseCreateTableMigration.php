@@ -2,6 +2,7 @@
 
 namespace ZnLib\Migration\Domain\Base;
 
+use Closure;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
@@ -18,7 +19,17 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
 
     protected $tableComment = '';
 
-    abstract public function tableSchema();
+    public function tableStructure(Blueprint $table): void
+    {
+
+    }
+
+    public function tableSchema()//: Closure
+    {
+        return function (Blueprint $table) {
+            $this->tableStructure($table);
+        };
+    }
 
     public function getConnection(): Connection
     {
@@ -32,7 +43,7 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
 
     public function addForeign(Blueprint $table, string $foreignColumns, string $onTable, string $referencesColumns = 'id', string $onDelete = ForeignActionEnum::CASCADE, string $onUpdate = ForeignActionEnum::CASCADE)
     {
-        if($this->isInOneDatabase($onTable)) {
+        if ($this->isInOneDatabase($onTable)) {
             $table
                 ->foreign($foreignColumns)
                 ->references($referencesColumns)
