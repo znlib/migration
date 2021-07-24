@@ -17,6 +17,7 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
 
     use TableNameTrait;
 
+    protected $blueprint;
     protected $tableComment = '';
 
     public function tableStructure(Blueprint $table): void
@@ -27,6 +28,7 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
     public function tableSchema()//: Closure
     {
         return function (Blueprint $table) {
+            $this->blueprint = $table;
             $this->tableStructure($table);
         };
     }
