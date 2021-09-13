@@ -91,5 +91,4 @@ abstract class BaseCreateTableMigration extends BaseMigration implements Migrati
             $this->runSqlQuery($schema, $sql);
         }
     }
-
 }
