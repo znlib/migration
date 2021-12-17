@@ -3,11 +3,6 @@
 namespace ZnLib\Migration\Domain\Scenarios\Render;
 
 use Zend\Code\Generator\FileGenerator;
-use ZnCore\Base\Legacy\Code\entities\ClassEntity;
-use ZnCore\Base\Legacy\Code\entities\ClassUseEntity;
-use ZnCore\Base\Legacy\Code\entities\ClassVariableEntity;
-use ZnCore\Base\Legacy\Code\entities\InterfaceEntity;
-use ZnCore\Base\Legacy\Code\enums\AccessEnum;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnTool\Generator\Domain\Helpers\TemplateCodeHelper;
 use ZnTool\Package\Domain\Helpers\PackageHelper;
