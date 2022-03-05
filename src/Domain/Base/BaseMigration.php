@@ -4,21 +4,29 @@ namespace ZnLib\Migration\Domain\Base;
 
 use Illuminate\Database\Schema\Builder;
 use ZnLib\Db\Capsule\Manager;
+use ZnLib\Db\Traits\EloquentTrait;
+use ZnSandbox\Sandbox\Generator\Domain\Repositories\Eloquent\SchemaRepository;
 
 abstract class BaseMigration
 {
 
-    protected $capsule;
+    use EloquentTrait;
 
-    public function __construct(Manager $capsule)
+//    protected $capsule;
+
+//    protected $schemaRepository;
+
+    public function __construct(Manager $capsule, SchemaRepository $schemaRepository)
     {
         $this->capsule = $capsule;
+//        $this->schemaRepository = $schemaRepository;
     }
 
-    public function getCapsule(): Manager
+    /*public function getCapsule(): Manager
     {
-        return $this->capsule;
-    }
+        return $this->schemaRepository->getCapsule();
+//        return $this->capsule;
+    }*/
 
     protected function runSqlQuery(Builder $schema, $sql)
     {
