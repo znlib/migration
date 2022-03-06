@@ -5,7 +5,7 @@ namespace ZnLib\Migration\Domain\Base;
 use Illuminate\Database\Schema\Builder;
 use ZnLib\Db\Capsule\Manager;
 use ZnLib\Db\Traits\EloquentTrait;
-use ZnSandbox\Sandbox\Generator\Domain\Repositories\Eloquent\SchemaRepository;
+use ZnLib\Db\Repositories\Eloquent\SchemaRepository;
 
 abstract class BaseMigration
 {

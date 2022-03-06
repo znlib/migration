@@ -11,7 +11,7 @@ use ZnLib\Db\Helpers\SqlHelper;
 use ZnLib\Db\Traits\TableNameTrait;
 use ZnLib\Migration\Domain\Enums\ForeignActionEnum;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;
-use ZnSandbox\Sandbox\Generator\Domain\Repositories\Eloquent\SchemaRepository;
+use ZnLib\Db\Repositories\Eloquent\SchemaRepository;
 
 abstract class BaseCreateTableMigration extends BaseMigration implements MigrationInterface
 {
