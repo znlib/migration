@@ -18,7 +18,7 @@ abstract class BaseMigration
 
     public function __construct(Manager $capsule, SchemaRepository $schemaRepository)
     {
-        $this->capsule = $capsule;
+        $this->setCapsule($capsule);
 //        $this->schemaRepository = $schemaRepository;
     }
 
