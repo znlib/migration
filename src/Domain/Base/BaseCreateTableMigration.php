@@ -7,7 +7,7 @@ use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
-use ZnLib\Db\Helpers\SqlHelper;
+use ZnDatabase\Base\Domain\Helpers\SqlHelper;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 use ZnLib\Migration\Domain\Enums\ForeignActionEnum;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;

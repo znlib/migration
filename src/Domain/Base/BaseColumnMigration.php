@@ -3,7 +3,7 @@
 namespace ZnLib\Migration\Domain\Base;
 
 use Illuminate\Database\Schema\Builder;
-use ZnLib\Db\Helpers\SqlHelper;
+use ZnDatabase\Base\Domain\Helpers\SqlHelper;
 
 abstract class BaseColumnMigration extends BaseCreateTableMigration
 {

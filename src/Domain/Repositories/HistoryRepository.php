@@ -12,8 +12,6 @@ use ZnLib\Db\Capsule\Manager;
 use ZnLib\Migration\Domain\Entities\MigrationEntity;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;
 
-//use ZnLib\Db\Helpers\TableAliasHelper;
-
 class HistoryRepository extends BaseEloquentRepository
 {
 
