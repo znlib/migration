@@ -2,13 +2,14 @@
 
 namespace ZnLib\Migration\Domain\Enums;
 
-class ForeignActionEnum
-{
+use ZnCore\Base\Helpers\DeprecateHelper;
 
-    const NO_ACTION = 'NO ACTION';
-    const RESTRICT = 'RESTRICT';
-    const CASCADE = 'CASCADE';
-    const SET_NULL = 'SET NULL';
-    const SET_DEFAULT = 'SET DEFAULT';
+DeprecateHelper::softThrow();
+
+/**
+ * @deprecated
+ */
+class ForeignActionEnum extends \ZnDatabase\Migration\Domain\Enums\ForeignActionEnum
+{
 
 }

@@ -2,19 +2,14 @@
 
 namespace ZnLib\Migration\Domain\Base;
 
-use Illuminate\Database\Schema\Builder;
-use ZnDatabase\Base\Domain\Helpers\SqlHelper;
+use ZnCore\Base\Helpers\DeprecateHelper;
 
-abstract class BaseColumnMigration extends BaseCreateTableMigration
+DeprecateHelper::softThrow();
+
+/**
+ * @deprecated 
+ */
+abstract class BaseColumnMigration extends \ZnDatabase\Migration\Domain\Base\BaseColumnMigration
 {
-
-    public function up(Builder $schema)
-    {
-        $isHasSchema = SqlHelper::isHasSchemaInTableName($this->tableNameAlias());
-        if ($isHasSchema) {
-            $schemaName = SqlHelper::extractSchemaFormTableName($this->tableNameAlias());
-            $this->getConnection()->statement('CREATE SCHEMA IF NOT EXISTS "' . $schemaName . '";');
-        }
-        $schema->table($this->tableNameAlias(), $this->tableSchema());
-    }
+    
 }

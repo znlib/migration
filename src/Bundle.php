@@ -7,17 +7,10 @@ use ZnCore\Base\Libs\App\Base\BaseBundle;
 class Bundle extends BaseBundle
 {
 
-    public function console(): array
+    public function deps(): array
     {
         return [
-            'ZnLib\Migration\Commands',
-        ];
-    }
-
-    public function container(): array
-    {
-        return [
-            __DIR__ . '/Domain/config/container.php',
+            new \ZnDatabase\Migration\Bundle(['all']),
         ];
     }
 }

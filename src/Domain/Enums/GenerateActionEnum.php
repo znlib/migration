@@ -2,10 +2,14 @@
 
 namespace ZnLib\Migration\Domain\Enums;
 
-class GenerateActionEnum
-{
+use ZnCore\Base\Helpers\DeprecateHelper;
 
-    const CREATE_TABLE = 'create table';
-    const ADD_COLUMN = 'add column';
+DeprecateHelper::softThrow();
+
+/**
+ * @deprecated
+ */
+class GenerateActionEnum extends \ZnDatabase\Migration\Domain\Enums\GenerateActionEnum
+{
 
 }
