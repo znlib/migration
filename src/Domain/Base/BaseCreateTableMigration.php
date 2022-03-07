@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
-use ZnLib\Db\Enums\DbDriverEnum;
+use ZnDatabase\Base\Domain\Enums\DbDriverEnum;
 use ZnLib\Db\Helpers\SqlHelper;
 use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 use ZnLib\Migration\Domain\Enums\ForeignActionEnum;
