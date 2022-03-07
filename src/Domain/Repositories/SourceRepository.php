@@ -7,7 +7,7 @@ use ZnCore\Base\Helpers\LoadHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\ArrayHelper;
 use ZnCore\Base\Legacy\Yii\Helpers\FileHelper;
 use ZnCore\Base\Libs\DotEnv\DotEnv;
-use ZnLib\Fixture\Domain\Traits\ConfigTrait;
+use ZnDatabase\Fixture\Domain\Traits\ConfigTrait;
 use ZnLib\Migration\Domain\Entities\MigrationEntity;
 
 class SourceRepository
