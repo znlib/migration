@@ -8,10 +8,10 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use ZnLib\Db\Enums\DbDriverEnum;
 use ZnLib\Db\Helpers\SqlHelper;
-use ZnLib\Db\Traits\TableNameTrait;
+use ZnDatabase\Base\Domain\Traits\TableNameTrait;
 use ZnLib\Migration\Domain\Enums\ForeignActionEnum;
 use ZnLib\Migration\Domain\Interfaces\MigrationInterface;
-use ZnLib\Db\Repositories\Eloquent\SchemaRepository;
+use ZnDatabase\Base\Domain\Repositories\Eloquent\SchemaRepository;
 
 abstract class BaseCreateTableMigration extends BaseMigration implements MigrationInterface
 {

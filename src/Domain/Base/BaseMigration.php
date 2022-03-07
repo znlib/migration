@@ -4,8 +4,8 @@ namespace ZnLib\Migration\Domain\Base;
 
 use Illuminate\Database\Schema\Builder;
 use ZnLib\Db\Capsule\Manager;
-use ZnLib\Db\Traits\EloquentTrait;
-use ZnLib\Db\Repositories\Eloquent\SchemaRepository;
+use ZnDatabase\Eloquent\Domain\Traits\EloquentTrait;
+use ZnDatabase\Base\Domain\Repositories\Eloquent\SchemaRepository;
 
 abstract class BaseMigration
 {
